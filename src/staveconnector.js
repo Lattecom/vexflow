@@ -94,7 +94,10 @@ Vex.Flow.StaveConnector = (function() {
       );
 
       if (isRightSidedConnector){
-        topX = this.top_stave.getX() + this.top_stave.width;
+        //---- ver.origin
+        // topX = this.top_stave.getX() + this.top_stave.width;
+        //---- ver.dh
+        topX = this.top_stave.modifiers[1].x;
       }
 
       var attachment_height = botY - topY;
