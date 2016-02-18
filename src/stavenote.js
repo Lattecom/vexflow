@@ -569,8 +569,12 @@ Vex.Flow.StaveNote = (function() {
       this.setYs(ys);
 
       var bounds = this.getNoteHeadBounds();
-	    if (this.hasStem()) {
+      //---- ver.origin
+	    // if (this.hasStem()) {
+      //---- ver.dh
+      if (!this.beam) {
         this.stem.setYBounds(bounds.y_top, bounds.y_bottom);
+      }
       }
 
       return this;
