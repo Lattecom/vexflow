@@ -154,6 +154,10 @@ Vex.Flow.GraceNoteGroup = (function(){
         grace_notes.forEach(function(graceNote) {
             var tick_context = graceNote.getTickContext();
             var x_offset = tick_context.getX();
+            //---- ver.dh
+            if(graceNote.getTickContextX() === undefined) { graceNote.setTickContextX(x_offset); }
+            else { var x_offset = graceNote.getTickContextX(); }
+            //---- v.d
             graceNote.setStave(note.stave);
             tick_context.setX(x + x_offset);
         });

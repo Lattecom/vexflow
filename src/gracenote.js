@@ -35,6 +35,16 @@ Vex.Flow.GraceNote = (function() {
       return 0;
     },
 
+    //---- ver.dh
+    setTickContextX: function(x) {
+      this.tick_context_x = x;
+      return this;
+    },
+    getTickContextX: function() {
+      return this.tick_context_x;
+    },
+    //---- v.d
+
     getCategory: function() { return 'gracenotes'; },
 
     draw: function(){
