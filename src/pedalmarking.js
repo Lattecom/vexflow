@@ -112,6 +112,10 @@ Vex.Flow.PedalMarking = (function() {
     // Set the rendering context
     setContext: function(context) { this.context = context; return this; },
 
+    //---- ver.dh
+    // Set the pedal type(start/stop)
+    setType: function(type) { this.type = type; return this; },
+
     // Draw the bracket based pedal markings
     drawBracketed: function() {
       var ctx = this.context;
@@ -218,6 +222,42 @@ Vex.Flow.PedalMarking = (function() {
         }
       });
     },
+    //---- ver.dh
+    // etType, drawTextOne is temporary function to draw only one mark(start mark or stop mark)
+    drawTextOne: function() {
+      var ctx = this.context;
+      var is_pedal_depressed = (this.type =='start') ? true : false;
+      var pedal = this;
+      var note = this.notes[0];
+      ctx.save();
+      ctx.setStrokeStyle(this.render_options.color);
+      ctx.setFillStyle(this.render_options.color);
+      ctx.setFont(this.font.family, this.font.size, this.font.weight);
+      // The glyph point size
+      var point = pedal.render_options.glyph_point_size;
+      // Iterate through each note, placing glyphs or custom text accordingly
+      var stave = note.getStave();
+      var x = note.getAbsoluteX();
+      var y = stave.getYForBottomText(pedal.line + 3);
+      var text_width = 0;
+      if (is_pedal_depressed) {
+        if (pedal.custom_depress_text) {
+          text_width = ctx.measureText(pedal.custom_depress_text).width;
+          ctx.fillText(pedal.custom_depress_text, x - (text_width/2), y);
+        } else {
+          drawPedalGlyph("pedal_depress", ctx, x, y, point);
+        }
+      } else {
+        if (pedal.custom_release_text) {
+          text_width = ctx.measureText(pedal.custom_release_text).width;
+          ctx.fillText(pedal.custom_release_text, x - (text_width/2), y);
+        } else {
+          drawPedalGlyph("pedal_release", ctx, x, y, point);
+        }
+      }
+      ctx.restore();
+    },
+    //---- v.d
 
     // Render the pedal marking in position on the rendering context 
     draw: function() {
