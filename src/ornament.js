@@ -214,10 +214,14 @@ Vex.Flow.Ornament = (function() {
 
       // Ajdust x position if ornament is delayed
       if (this.delayed) {
-        glyph_x += this.ornament.width;
+        //---- ver.origin
+        // glyph_x += this.ornament.width;
         var next_context = Vex.Flow.TickContext.getNextContext(this.note.getTickContext());
         if (next_context) {
-          glyph_x += (next_context.getX() - glyph_x) * 0.5;
+          //---- ver.origin
+          // glyph_x += (next_context.getX() - glyph_x) * 0.5;
+          //---- ver.dh
+          glyph_x += (next_context.getX() - this.note.getX()) * 0.5;
         } else {
           glyph_x += (stave.x + stave.width - glyph_x) * 0.5;
         }
