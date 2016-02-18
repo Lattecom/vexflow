@@ -48,12 +48,23 @@ Vex.Flow.Tremolo = (function() {
       var start = this.note.getModifierStartXY(this.position, this.index);
       var x = start.x;
       var y = start.y;
+      //---- ver.dh
+      var y_spacing = this.y_spacing;
 
+      if (this.note.stem_direction === 1)  {
+        y += 29;
+        x += 9;
+        y_spacing = -y_spacing;
+      }
+      //---- v.d
       x += this.shift_right;
       for (var i = 0; i < this.num; ++i) {
         Vex.Flow.renderGlyph(this.context, x, y,
                              this.render_options.font_scale, this.code);
-        y += this.y_spacing;
+        //---- ver.origin
+        // y += this.y_spacing;
+        //---- ver.dh
+        y += y_spacing;
       }
     }
   });
